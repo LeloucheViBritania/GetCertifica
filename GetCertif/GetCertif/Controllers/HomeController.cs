@@ -13,18 +13,42 @@ namespace GetCertif.Controllers
             return View();
         }
 
-        public ActionResult About()
+
+
+        public ActionResult Travel()
         {
-            ViewBag.Message = "Your application description page.";
+
 
             return View();
         }
+
+
+        public ActionResult Fashion()
+        {
+
+
+            return View();
+        }
+
+
+        public ActionResult About()
+        {
+            return View();
+        } 
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+
+
 
             return View();
         }
+
+        public ActionResult Single()
+        {
+            return View();
+        }
+    
+   
     }
 }
