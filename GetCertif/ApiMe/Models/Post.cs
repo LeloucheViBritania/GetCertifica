@@ -25,8 +25,9 @@ namespace ApiMe.Models
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public ICollection<PostTag> PostTags{ get; set; }
+        public int TadId { get; set; }
 
+        public Tag Tag { get; set; }
 
 
 

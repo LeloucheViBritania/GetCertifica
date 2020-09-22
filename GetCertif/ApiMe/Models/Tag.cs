@@ -12,7 +12,7 @@ namespace ApiMe.Models
         public int TagId { get; set; }
 
 
-        public ICollection<PostTag> PostTags{ get; set; }
+        public ICollection<Post> Posts{ get; set; }
     
       }
 }

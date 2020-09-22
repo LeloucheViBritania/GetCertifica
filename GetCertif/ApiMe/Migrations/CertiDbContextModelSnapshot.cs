@@ -58,6 +58,12 @@ namespace ApiMe.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TadId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TagId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -65,24 +71,11 @@ namespace ApiMe.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("TagId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("ApiMe.Models.PostTag", b =>
-                {
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TagId", "PostId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("PostTags");
                 });
 
             modelBuilder.Entity("ApiMe.Models.Tag", b =>
@@ -124,24 +117,13 @@ namespace ApiMe.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ApiMe.Models.Tag", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("TagId");
+
                     b.HasOne("ApiMe.Models.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ApiMe.Models.PostTag", b =>
-                {
-                    b.HasOne("ApiMe.Models.Post", "Post")
-                        .WithMany("PostTags")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ApiMe.Models.Tag", "Tag")
-                        .WithMany("PostTags")
-                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

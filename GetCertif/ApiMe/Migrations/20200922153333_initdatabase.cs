@@ -49,7 +49,9 @@ namespace ApiMe.Migrations
                     PostId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: false),
+                    TadId = table.Column<int>(nullable: false),
+                    TagId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,6 +62,12 @@ namespace ApiMe.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Posts_Tags_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tags",
+                        principalColumn: "TagId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Posts_Users_UserId",
                         column: x => x.UserId,
@@ -87,30 +95,6 @@ namespace ApiMe.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "PostTags",
-                columns: table => new
-                {
-                    PostId = table.Column<int>(nullable: false),
-                    TagId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PostTags", x => new { x.TagId, x.PostId });
-                    table.ForeignKey(
-                        name: "FK_PostTags_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "PostId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PostTags_Tags_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Tags",
-                        principalColumn: "TagId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",
                 table: "Comments",
@@ -122,14 +106,14 @@ namespace ApiMe.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Posts_TagId",
+                table: "Posts",
+                column: "TagId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_UserId",
                 table: "Posts",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PostTags_PostId",
-                table: "PostTags",
-                column: "PostId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -138,16 +122,13 @@ namespace ApiMe.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "PostTags");
-
-            migrationBuilder.DropTable(
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Tags");
 
             migrationBuilder.DropTable(
                 name: "Users");

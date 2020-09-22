@@ -17,20 +17,6 @@ namespace ApiMe.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PostTag>()
-                 .HasKey(pt => new { pt.TagId, pt.PostId });
-
-            modelBuilder.Entity<PostTag>()
-               
-                .HasOne(m => m.Tag)
-                .WithMany(ma => ma.PostTags)
-                .HasForeignKey(m => m.TagId);
-
-
-            modelBuilder.Entity<PostTag>()
-                 .HasOne(p => p.Post)
-                 .WithMany(ma => ma.PostTags)
-                 .HasForeignKey(p => p.PostId);
 
 
 
@@ -39,6 +25,12 @@ namespace ApiMe.DAL
                 .WithOne(e => e.Post);
             modelBuilder.Entity<Comment>()
                 .Ignore(x => x.Post);
+
+            modelBuilder.Entity<Tag>()
+                .HasMany(c => c.Posts)
+                .WithOne(e => e.Tag);
+            modelBuilder.Entity<Post>()
+                .Ignore(x => x.Tag);
 
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Posts)
@@ -54,7 +46,7 @@ namespace ApiMe.DAL
 
         public DbSet<Post> Posts { get; set; }
 
-        public DbSet<PostTag> PostTags { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
     }
