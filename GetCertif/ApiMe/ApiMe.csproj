@@ -180,9 +180,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\MappingProfil.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FashionController.cs" />
     <Compile Include="DAL\CertiDbContext.cs" />
+    <Compile Include="DTOs\CommentsDTO.cs" />
+    <Compile Include="DTOs\PostDTOs.cs" />
+    <Compile Include="DTOs\TagDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

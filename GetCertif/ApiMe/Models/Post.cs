@@ -13,8 +13,10 @@ namespace ApiMe.Models
         public int PostId { get; set; }
 
 
+        public string PostTitle { get; set; }
 
-
+        public string PostDescription { get; set; }
+        public DateTime PostDate { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
 

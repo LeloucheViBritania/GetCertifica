@@ -7,5 +7,6 @@ namespace ApiMe.DTOs
 {
     public class CommentsDTO
     {
+        public int CommentId { get; set; }
     }
 }

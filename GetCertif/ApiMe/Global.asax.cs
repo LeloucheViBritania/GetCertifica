@@ -1,3 +1,5 @@
+using ApiMe.App_Start;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace ApiMe
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            Mapper.Initialize(c => c.AddProfile<MappingProfil>());
         }
     }
 }
